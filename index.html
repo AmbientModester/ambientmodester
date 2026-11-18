@@ -492,12 +492,27 @@ section {
     color: #8199ce;
     font-size: 13px;
     overflow: hidden;
+    position: relative;
 }
 
-.project-image img {
+/* SLIDESHOW */
+
+.project-image .slide {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.project-image .slide.active {
+    opacity: 1;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
 }
 
 .project-info {
@@ -593,13 +608,13 @@ footer {
         letter-spacing: -2px;
     }
 
-   .hero-name {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(40px, 5.5vw, 68px);
-    font-weight: 800;
-    letter-spacing: -2.5px;
-    line-height: 1.15;
-}
+    .hero-name {
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(40px, 5.5vw, 68px);
+        font-weight: 800;
+        letter-spacing: -2.5px;
+        line-height: 1.15;
+    }
 
     .spark {
         font-size: 24px;
@@ -807,10 +822,24 @@ footer {
 
     <div class="project-grid">
 
+        <!-- PROJECT 1: CUSTOM WEAPON SYSTEM -->
+
         <div class="project-card">
 
-            <div class="project-image">
-                PROJECT IMAGE 01
+            <div class="project-image slideshow">
+
+                <img src="images/erm.png"
+                     class="slide active"
+                     alt="Custom Weapon System - Scope">
+
+                <img src="images/scope.png"
+                     class="slide"
+                     alt="Custom Weapon System - Screenshot 2">
+
+                <img src="images/leaderstats.png"
+                     class="slide"
+                     alt="Custom Weapon System - Screenshot 3">
+
             </div>
 
             <div class="project-info">
@@ -823,10 +852,20 @@ footer {
 
         </div>
 
+        <!-- PROJECT 2: MAP DESIGN -->
+
         <div class="project-card">
 
-            <div class="project-image">
-                PROJECT IMAGE 02
+            <div class="project-image slideshow">
+
+                <img src="images/Map1.png"
+                     class="slide active"
+                     alt="Building and Map Design - Screenshot 1">
+
+                <img src="images/Map2.png"
+                     class="slide"
+                     alt="Building and Map Design - Screenshot 2">
+
             </div>
 
             <div class="project-info">
@@ -856,14 +895,14 @@ footer {
         Let's discuss your project and bring your ideas to life.
     </p>
 
-    <div class="buttons">
-        <a href="https://discord.com/"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="btn primary">
-            CONTACT ME ON DISCORD →
-        </a>
-    </div>
+   <div class="buttons">
+    <a href="https://discord.com/users/1447155143169544314"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="btn primary">
+        CONTACT ME ON DISCORD →
+    </a>
+</div>
 
 </section>
 
@@ -935,6 +974,29 @@ music.addEventListener("ended", () => {
 });
 
 updateMusicButton();
+</script>
+
+<!-- IMAGE SLIDESHOW -->
+
+<script>
+document.querySelectorAll(".slideshow").forEach(slideshow => {
+
+    const slides = slideshow.querySelectorAll(".slide");
+    let current = 0;
+
+    if (slides.length <= 1) return;
+
+    setInterval(() => {
+
+        slides[current].classList.remove("active");
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add("active");
+
+    }, 4000);
+
+});
 </script>
 
 <!-- ORIGINAL HONEYCOMB INTERACTION -->
